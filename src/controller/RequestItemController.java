@@ -40,27 +40,29 @@ public class RequestItemController {
 	}
 	
 	public boolean isMemberOldEnough(){
-		// Check if the age restriction is satisfiable.
-		
+		// Check if the age restriction is satisfiable.	
 		if (this.item instanceof Book){
 			Book book = (Book) this.item;
 			if (this.member.getAge() >= book.getAgeRestriction()){
 				return true;
 			}
+			return false;
 		}
 		else if (this.item instanceof DVD){
 			DVD dvd = (DVD) this.item;
 			if (this.member.getAge() >= dvd.getAgeRestriction()){
 				return true;
 			}
+			return false;
 		}
 		else if (this.item instanceof VideoGame){
 			VideoGame game = (VideoGame) this.item;
 			if (this.member.getAge() >= game.getAgeRestriction()){
 				return true;
 			}
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	public void request(){

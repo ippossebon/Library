@@ -31,8 +31,7 @@ public class SearchController {
 		return toSearch;
 	}
 
-	public void setToSearch(String toSearch) {
-		
+	public void setToSearch(String toSearch) {		
 		try{
 				this.toSearch = toSearch;
 			}
