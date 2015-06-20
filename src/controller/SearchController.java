@@ -34,62 +34,31 @@ public class SearchController {
 	public void setToSearch(String toSearch) {
 		
 		try{
-			if (this.toSearch.equals("Search for item")){
-				this.toSearch = "All";
-			}
-			else{
 				this.toSearch = toSearch;
 			}
-		}
 		catch (NullPointerException e){
 			this.toSearch = "All";
 		}
 	}
 	
 	public void search(){
-		
-		if (this.toSearch.equals("All")){
-			this.foundResults = returnAllDatabase();
-		}
 		if (this.searchForID){
 			this.foundResults = searchForID();
 		}
-		if (this.searchForTitle){
-			this.foundResults = searchForTitle();
-		}
-		if (this.searchForAuthor){
-			this.foundResults = searchForAuthor();
+		else {
+			if (this.searchForTitle){
+				this.foundResults = searchForTitle();
+			}
+			else {
+				if (this.searchForAuthor){
+					this.foundResults = searchForAuthor();
+				}
+				else
+					this.foundResults = returnAllDatabase();
+			}
 		}
 		this.foundResults = mixedSearch();
 		resetFilters();
-	}
-	
-	private ArrayList<Item> searchForType(){
-		for (Item i : this.databaseController.getItems()){
-			if (i.getType().equals(typeToSearch)){
-				this.foundResults.add(i);
-			}
-		}	
-		return this.foundResults;
-	}
-	
-	private ArrayList<Item> searchForGenre(){	
-		for (Item i: this.databaseController.getItems()){
-			// Only CDs and DVDs have a genre.
-			if (i instanceof CD){
-				CD x = (CD) i;
-				if (x.getGenre().equals(this.genreToSearch)){
-					this.foundResults.add(x);
-				}
-			}
-			if (i instanceof DVD){
-				DVD y = (DVD) i;
-				if (y.getGenre().equals(this.genreToSearch)){
-					this.foundResults.add(y);
-				}
-			}		
-		}
-		return this.foundResults;
 	}
 	
 	private ArrayList<Item> searchForID(){
@@ -100,8 +69,8 @@ public class SearchController {
 		}
 		else{
 			for (Item i: this.databaseController.getItems()){
-				if (i.getId() == toSearch){
-					this.foundResults.add(i);
+				if (i.getId().toLowerCase().contains(toSearch.toLowerCase())){
+					this.foundResults.add(i);			
 				}
 			}
 		}
@@ -117,7 +86,7 @@ public class SearchController {
 		else
 		{
 			for (Item i: this.databaseController.getItems()){
-				if (i.getTitle().equals(toSearch)){
+				if (i.getTitle().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
 				}
 			}	
@@ -135,44 +104,8 @@ public class SearchController {
 		else
 		{
 			for (Item i: this.databaseController.getItems()){
-				if (i.getAuthor().equals(toSearch)){
+				if (i.getAuthor().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
-				}
-			}
-		}
-		return this.foundResults;
-	}
-	
-	private ArrayList<Item> searchForCategory(){
-		for (Item i: this.databaseController.getItems()){
-			for (String c : i.getCategories()){
-				if (c.equals(categoryToSearch)){
-					this.foundResults.add(i);
-				}
-			}
-		}
-		return this.foundResults;
-	}
-	
-	private ArrayList<Item> searchForAgeRestriction(){
-		for (Item i : this.databaseController.getItems()){
-			// Only books, dvds and videogames have age restriction
-			if (i instanceof Book){
-				Book x = (Book) i;
-				if (x.getAgeRestriction() == this.ageRestrictionToSearch){
-					this.foundResults.add(x);
-				}
-			}
-			if (i instanceof DVD){
-				DVD x = (DVD) i;
-				if (x.getAgeRestriction() == this.ageRestrictionToSearch){
-					this.foundResults.add(x);
-				}
-			}
-			if (i instanceof VideoGame){
-				VideoGame x = (VideoGame) i;
-				if (x.getAgeRestriction() == this.ageRestrictionToSearch){
-					this.foundResults.add(x);
 				}
 			}
 		}
@@ -180,34 +113,17 @@ public class SearchController {
 	}
 	
 	private ArrayList<Item> mixedSearch(){
-		
-		if (this.foundResults.isEmpty()){
-			if (! this.typeToSearch.equals("All")){
-				this.foundResults = searchForType();
-			}
-			if (! this.genreToSearch.equals("All")){
-				this.foundResults = searchForGenre();
-			}
-			if (! this.categoryToSearch.equals("All")){
-				this.foundResults = searchForCategory();
-			}
-			if (this.ageRestrictionToSearch != 0){
-				this.foundResults = searchForAgeRestriction();
-			}
+		if (! this.typeToSearch.equals("All")){
+			this.foundResults = crossedSearchForType();
 		}
-		else {
-			if (! this.typeToSearch.equals("All")){
-				this.foundResults = crossedSearchForType();
-			}
-			if (! this.genreToSearch.equals("All")){
-				this.foundResults = crossedSearchForGenre();
-			}
-			if (! this.categoryToSearch.equals("All")){
-				this.foundResults = crossedSearchForCategory();
-			}
-			if (this.ageRestrictionToSearch != 0){
-				this.foundResults = crossedSearchForAgeRestriction();
-			}
+		if (! this.genreToSearch.equals("All")){
+			this.foundResults = crossedSearchForGenre();
+		}
+		if (! this.categoryToSearch.equals("All")){
+			this.foundResults = crossedSearchForCategory();
+		}
+		if (this.ageRestrictionToSearch != 0){
+			this.foundResults = crossedSearchForAgeRestriction();
 		}
 		
 		return this.foundResults;
@@ -267,19 +183,19 @@ public class SearchController {
 			// Only books, dvds and videogames have age restriction.
 			if (item instanceof Book){
 				Book x = (Book) item;
-				if (x.getAgeRestriction() != this.ageRestrictionToSearch){
+				if (x.getAgeRestriction() > this.ageRestrictionToSearch){
 					this.foundResults.remove(i);
 				}
 			}
 			if (item instanceof DVD){
 				DVD x = (DVD) item;
-				if (x.getAgeRestriction() != this.ageRestrictionToSearch){
+				if (x.getAgeRestriction() > this.ageRestrictionToSearch){
 					this.foundResults.remove(i);
 				}
 			}
 			if (item instanceof VideoGame){
 				VideoGame x = (VideoGame) item;
-				if (x.getAgeRestriction() != this.ageRestrictionToSearch){
+				if (x.getAgeRestriction() > this.ageRestrictionToSearch){
 					this.foundResults.remove(i);
 				}
 			}
@@ -394,11 +310,5 @@ public class SearchController {
 			this.foundResults.add(i);
 		}
 		return this.foundResults;
-	}
-	
-	private void debugFoundResults(){
-		for (Item i : this.foundResults){
-			System.out.println(i.getTitle());
-		}
 	}
 }

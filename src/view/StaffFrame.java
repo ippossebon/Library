@@ -66,7 +66,7 @@ public class StaffFrame extends JFrame{
 		contentPane.add(btnLoan);
 		
 		comboBoxType = new JComboBox<String>();
-		comboBoxType.setModel(new DefaultComboBoxModel<String>(new String[] {"All", "Book", "CD", "Document", "DVD", "Videogame"}));
+		comboBoxType.setModel(new DefaultComboBoxModel<String>(new String[] {"All", "Book", "CD", "Document", "DVD", "VideoGame"}));
 		comboBoxType.setBounds(21, 85, 102, 27);
 		contentPane.add(comboBoxType);
 		
