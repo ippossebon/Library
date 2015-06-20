@@ -149,9 +149,14 @@ public class SearchController {
 					this.foundResults.remove(i);
 				}
 			}
-			if (item instanceof DVD){
-				DVD x = (DVD) item;
-				if (! x.getGenre().equals(this.genreToSearch)){
+			else {
+				if (item instanceof DVD){
+					DVD x = (DVD) item;
+					if (! x.getGenre().equals(this.genreToSearch)){
+						this.foundResults.remove(i);
+					}
+				}
+				else {
 					this.foundResults.remove(i);
 				}
 			}
