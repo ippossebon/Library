@@ -42,37 +42,14 @@ public class SearchController {
 	}
 	
 	public void search(){
-		if (this.searchForID){
+		if (this.searchForID)
 			this.foundResults = searchForID();
-		}
-<<<<<<< HEAD
-		else if (this.searchForTitle){
-			this.foundResults = searchForTitle();
-		}
-		else if (this.searchForAuthor){
-			this.foundResults = searchForAuthor();
-		}
-		else if (this.toSearch.equals("All")){
-			this.foundResults = returnAllDatabase();
-		}
-		this.foundResults = mixedSearch();
-		resetFilters();
-	}
-	
-	private ArrayList<Item> searchForType(){
-		for (Item i : this.databaseController.getItems()){
-			if (i.getType().equals(typeToSearch)){
-				this.foundResults.add(i);
-=======
 		else {
-			if (this.searchForTitle){
+			if (this.searchForTitle)
 				this.foundResults = searchForTitle();
->>>>>>> origin/master
-			}
 			else {
-				if (this.searchForAuthor){
+				if (this.searchForAuthor)
 					this.foundResults = searchForAuthor();
-				}
 				else
 					this.foundResults = returnAllDatabase();
 			}
