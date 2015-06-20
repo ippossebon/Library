@@ -38,7 +38,7 @@ public class Database {
 		this.addMember(member1);
 		Member member2 = new Member("Stephen Hawking", 73);
 		this.addMember(member2);
-		Member member3 = new Member("Sheldon Cooper", 12);
+		Member member3 = new Member("Sheldon Cooper", 5);
 		this.addMember(member3);
 		Member member4 = new Member("Penny", 28);
 		this.addMember(member4);
@@ -253,5 +253,32 @@ public class Database {
 
 	public void setGenres(ArrayList<String> genres) {
 		this.genres = genres;
+	}
+	
+	public Item getItemFromTitle(String title){
+		for (Item item : this.items){
+			if (item.getTitle().equals(title)){
+				return item;
+			}	
+		}
+		return null;
+	}
+	
+	public Member getMemberByName(String name){
+		for (Member m : this.members){
+			if (m.getName().equals(name)){
+				return m;
+			}
+		}
+		return null;
+	}
+	
+	public boolean isMemberOnDatabase(String name){
+		for (Member m : this.members){
+			if (m.getName().equals(name)){
+				return true;
+			}
+		}
+		return false;
 	}
 }

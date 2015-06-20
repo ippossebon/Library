@@ -4,18 +4,20 @@ import java.util.ArrayList;
 
 import model.Item;
 import model.Member;
+import model.Rent;
 import model.Staff;
 import model.SuperStaff;
+import controller.Request;
 
 public class DatabaseController {
 	private Database database;
-	private ArrayList<Item> currentRentedItems;
-	private ArrayList<Item> requestedItems;
+	private ArrayList<Rent> currentRentedItems;
+	private ArrayList<Request> requestedItems;
 	
 	public DatabaseController(){
 		setDatabase(new Database());
-		setCurrentRentedItems(new ArrayList<Item>());
-		setRequestedItems(new ArrayList<Item>());
+		setCurrentRentedItems(new ArrayList<Rent>());
+		setRequestedItems(new ArrayList<Request>());
 	}
 
 	public Database getDatabase() {
@@ -26,19 +28,31 @@ public class DatabaseController {
 		this.database = database;
 	}
 
-	public ArrayList<Item> getCurrentRentedItems() {
+	public ArrayList<Rent> getCurrentRentedItems() {
 		return currentRentedItems;
 	}
 
-	public void setCurrentRentedItems(ArrayList<Item> currentRentedItems) {
+	public void setCurrentRentedItems(ArrayList<Rent> currentRentedItems) {
 		this.currentRentedItems = currentRentedItems;
 	}
+	
+	public void addRentedItem(Rent rent){
+		this.currentRentedItems.add(rent);
+	}
+	
+	public void removeRentedItemFromList (Item item){
+		for (Rent r : this.currentRentedItems){
+			if (r.getItem().getId() == item.getId()){
+				this.currentRentedItems.remove(r);
+			}
+		}
+	}
 
-	public ArrayList<Item> getRequestedItems() {
+	public ArrayList<Request> getRequestedItems() {
 		return requestedItems;
 	}
 
-	public void setRequestedItems(ArrayList<Item> requestedItems) {
+	public void setRequestedItems(ArrayList<Request> requestedItems) {
 		this.requestedItems = requestedItems;
 	}
 	
@@ -107,5 +121,21 @@ public class DatabaseController {
 	
 	public Item getItemFromId(String id){
 		return this.database.getItemFromId(id);
+	}
+	
+	public Item getItemFromTitle (String title){
+		return this.database.getItemFromTitle(title);
+	}
+	
+	public Member getMemberByName (String name){
+		return this.database.getMemberByName(name);
+	}
+	
+	public boolean isMemberOnDatabase(String name){
+		return this.database.isMemberOnDatabase(name);
+	}
+	
+	public void addRequest(Request request){
+		this.requestedItems.add(request);
 	}
 }

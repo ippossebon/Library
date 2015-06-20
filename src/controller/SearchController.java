@@ -47,18 +47,17 @@ public class SearchController {
 	}
 	
 	public void search(){
-		
-		if (this.toSearch.equals("All")){
-			this.foundResults = returnAllDatabase();
-		}
 		if (this.searchForID){
 			this.foundResults = searchForID();
 		}
-		if (this.searchForTitle){
+		else if (this.searchForTitle){
 			this.foundResults = searchForTitle();
 		}
-		if (this.searchForAuthor){
+		else if (this.searchForAuthor){
 			this.foundResults = searchForAuthor();
+		}
+		else if (this.toSearch.equals("All")){
+			this.foundResults = returnAllDatabase();
 		}
 		this.foundResults = mixedSearch();
 		resetFilters();

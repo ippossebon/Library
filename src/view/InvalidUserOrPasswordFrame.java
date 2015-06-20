@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,29 +10,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.border.EmptyBorder;
 
+import controller.OkButtonCloseAction;
+
 public class InvalidUserOrPasswordFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InvalidUserOrPasswordFrame frame = new InvalidUserOrPasswordFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public InvalidUserOrPasswordFrame() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 449, 156);
@@ -50,22 +32,8 @@ public class InvalidUserOrPasswordFrame extends JFrame {
 		
 		JButton btnOk = new JButton("OK");
 		btnOk.setBounds(308, 85, 117, 29);
-		btnOk.addActionListener(new OkAction(this));
+		btnOk.addActionListener(new OkButtonCloseAction(this));
 		contentPane.add(btnOk);
-	}
-	
-	private class OkAction implements ActionListener{
-		private InvalidUserOrPasswordFrame frame;
-		
-		public OkAction(InvalidUserOrPasswordFrame frame){
-			this.frame = frame;
-		}
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			this.frame.dispose();
-		}
-		
+		setVisible(true);
 	}
 }

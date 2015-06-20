@@ -1,12 +1,16 @@
-package model;
+package controller;
 
-public class Rent {
+import model.Item;
+import model.Member;
+
+public class Request {
+
 	private Member member;
 	private Item item;
 	
-	public Rent(Member m, Item i){
-		this.setMember(m);
-		this.setItem(i);
+	public Request(Member member, Item item){
+		this.setMember(member);
+		this.setItem(item);
 	}
 
 	public Member getMember() {
@@ -24,5 +28,4 @@ public class Rent {
 	public void setItem(Item item) {
 		this.item = item;
 	}
-
 }

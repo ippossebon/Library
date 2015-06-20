@@ -11,14 +11,13 @@ import model.Book;
 import model.CD;
 import model.DVD;
 import model.VideoGame;
-import controller.LoanController;
 import controller.OkButtonCloseAction;
-import controller.OkLoanButtonAction;
+import controller.OkButtonRequestAction;
+import controller.RequestItemController;
 
-public class LoanItemFrame extends JFrame {
-
+public class RequestItemFrame extends JFrame {
+	
 	private JPanel contentPane;
-	private LoanController loanController;
 	private JTextField titleTextField;
 	private JTextField authorTextField;
 	private JTextField idTextField;
@@ -26,11 +25,12 @@ public class LoanItemFrame extends JFrame {
 	private JTextField typeTextField;
 	private JTextField genreTextField;
 	private JTextField ageRestrictionTextField;
-
-	public LoanItemFrame(LoanController loanController, String titleToRent) {
-		setTitle("Loan item");
-		this.loanController = loanController;
-		this.loanController.setItemToRent(titleToRent);
+	private RequestItemController requestItemController;
+	
+	public RequestItemFrame(RequestItemController requestItemController) {
+		setTitle("Request item");
+		this.requestItemController = requestItemController;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 533, 329);
 		contentPane = new JPanel();
@@ -88,7 +88,7 @@ public class LoanItemFrame extends JFrame {
 		JButton btnOk = new JButton("Ok");
 		btnOk.setBounds(445, 263, 75, 29);
 		btnOk.addActionListener(new OkButtonCloseAction(this));
-		btnOk.addActionListener(new OkLoanButtonAction(this.loanController));
+		btnOk.addActionListener(new OkButtonRequestAction(this.requestItemController));
 		contentPane.add(btnOk);
 		
 		typeTextField = new JTextField();
@@ -115,28 +115,28 @@ public class LoanItemFrame extends JFrame {
 		displayItemInformation();
 		this.setVisible(true);
 	}
-	
+
 	private void displayItemInformation(){
-		this.titleTextField.setText(this.loanController.getItemToRent().getTitle());
-		this.authorTextField.setText(this.loanController.getItemToRent().getAuthor());
-		this.idTextField.setText(this.loanController.getItemToRent().getId());
-		this.typeTextField.setText(this.loanController.getItemToRent().getType());
+		this.titleTextField.setText(this.requestItemController.getItem().getTitle());
+		this.authorTextField.setText(this.requestItemController.getItem().getAuthor());
+		this.idTextField.setText(this.requestItemController.getItem().getId());
+		this.typeTextField.setText(this.requestItemController.getItem().getType());
 		
-		if (this.loanController.getItemToRent() instanceof CD){
-			CD cd = (CD) this.loanController.getItemToRent();
+		if (this.requestItemController.getItem() instanceof CD){
+			CD cd = (CD) this.requestItemController.getItem();
 			this.genreTextField.setText(cd.getGenre());
 		}
-		else if (this.loanController.getItemToRent() instanceof DVD){
-			DVD dvd = (DVD) this.loanController.getItemToRent();
+		else if (this.requestItemController.getItem() instanceof DVD){
+			DVD dvd = (DVD) this.requestItemController.getItem();
 			this.genreTextField.setText(dvd.getGenre());
 			this.ageRestrictionTextField.setText("+ " + dvd.getAgeRestriction());
 		}
-		else if (this.loanController.getItemToRent() instanceof Book){
-			Book book = (Book) this.loanController.getItemToRent();
+		else if (this.requestItemController.getItem() instanceof Book){
+			Book book = (Book) this.requestItemController.getItem();
 			this.ageRestrictionTextField.setText("+ " + book.getAgeRestriction());
 		}
-		else if (this.loanController.getItemToRent() instanceof VideoGame){
-			VideoGame game = (VideoGame) this.loanController.getItemToRent();
+		else if (this.requestItemController.getItem() instanceof VideoGame){
+			VideoGame game = (VideoGame) this.requestItemController.getItem();
 			this.ageRestrictionTextField.setText("+ " + game.getAgeRestriction());
 		}
 	}

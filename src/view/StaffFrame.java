@@ -20,6 +20,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import model.Item;
+import controller.LoanButtonAction;
+import controller.LoanController;
 import controller.SearchButtonAction;
 import controller.SearchController;
 import database.DatabaseController;
@@ -27,7 +29,7 @@ import database.DatabaseController;
 public class StaffFrame extends JFrame{
 
 	public static final int MAXRESULTSIZE = 100;
-	private DatabaseController databaseController;
+	private static DatabaseController databaseController;
 	private static JPanel contentPane;
 	private static JTextField txtSearchForItem;
 	private static JList<String> searchResultsList;
@@ -39,9 +41,9 @@ public class StaffFrame extends JFrame{
 	private static JRadioButton rdbtnTitle;
 	private static JRadioButton rdbtnIdentifier;
 
-	public StaffFrame(DatabaseController databaseController) throws IOException 
+	public StaffFrame(DatabaseController dc) throws IOException 
 	{	
-		this.databaseController = databaseController;
+		databaseController = dc;
 		searchResultsList = new JList<String>();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,8 +63,10 @@ public class StaffFrame extends JFrame{
 		textArea.setBounds(165, 177, 1, 16);
 		contentPane.add(textArea);
 		
+		LoanController loanController = new LoanController(this.databaseController);
 		JButton btnLoan = new JButton("Loan");
 		btnLoan.setBounds(634, 121, 117, 29);
+		btnLoan.addActionListener(new LoanButtonAction(loanController));
 		contentPane.add(btnLoan);
 		
 		comboBoxType = new JComboBox<String>();
@@ -73,7 +77,7 @@ public class StaffFrame extends JFrame{
 		comboBoxGenre = new JComboBox<String>();
 		comboBoxGenre.setModel(new DefaultComboBoxModel<String>(new String[] {"All"}));
 		comboBoxGenre.setBounds(141, 85, 147, 27);
-		for (String g : this.databaseController.getGenresFromDatabase()){
+		for (String g : databaseController.getGenresFromDatabase()){
 			comboBoxGenre.addItem(g);
 		}
 		contentPane.add(comboBoxGenre);
@@ -81,7 +85,7 @@ public class StaffFrame extends JFrame{
 		comboBoxCategory = new JComboBox<String>();
 		comboBoxCategory.setModel(new DefaultComboBoxModel<String>(new String[] {"All"}));
 		comboBoxCategory.setBounds(300, 85, 150, 27);
-		for (String c : this.databaseController.getCategoriesFromDatabase()){
+		for (String c : databaseController.getCategoriesFromDatabase()){
 			comboBoxCategory.addItem(c);
 		}
 		comboBoxCategory.setVisible(true);
@@ -120,7 +124,7 @@ public class StaffFrame extends JFrame{
 		rdbtnIdentifier.setBounds(305, 35, 94, 23);
 		contentPane.add(rdbtnIdentifier);
 		
-		SearchController searchController = new SearchController(this.databaseController);
+		SearchController searchController = new SearchController(databaseController);
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(634, 7, 117, 29);
 		btnSearch.addActionListener(new SearchButtonAction(searchController));
@@ -161,6 +165,10 @@ public class StaffFrame extends JFrame{
 		searchResultsList.repaint();
 	}
 	
+	public static JList<String> getSearchResultsList(){
+		return searchResultsList;
+	}
+	
 	public static JComboBox<String> getComboBoxType(){
 		return comboBoxType;
 	}
@@ -191,5 +199,9 @@ public class StaffFrame extends JFrame{
 	
 	public static JTextField getSearchForItemTextField(){
 		return txtSearchForItem;
+	}
+	
+	public static DatabaseController getDatabaseController(){
+		return databaseController;
 	}
 }
