@@ -161,8 +161,6 @@ public class StaffFrame extends JFrame{
 		searchResultsList.repaint();
 	}
 	
-	public static 
-	
 	public static JComboBox<String> getComboBoxType(){
 		return comboBoxType;
 	}
