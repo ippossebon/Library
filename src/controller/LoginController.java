@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 
 import view.InvalidUserOrPasswordFrame;
+import view.MemberFrame;
 import view.StaffFrame;
 import view.SuperStaffFrame;
 import database.DatabaseController;
@@ -53,7 +54,7 @@ public class LoginController{
 					invalid_user_password_frame.setVisible(true);
 					e.printStackTrace();
 					
-				}catch (IOException e1) {
+				} catch (IOException e1){
 					InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
 					invalid_user_password_frame.setVisible(true);
 					e1.printStackTrace();
@@ -68,7 +69,17 @@ public class LoginController{
 						invalid_user_password_frame.setVisible(true);
 						e.printStackTrace();
 						
-					} catch (IOException e) {
+					} catch (IOException e1){
+						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
+						invalid_user_password_frame.setVisible(true);
+						e1.printStackTrace();
+					}
+					break;
+				case 2:
+					try{
+						MemberFrame memberFrame = new MemberFrame(this.databaseController);
+						memberFrame.setVisible(true);
+					}catch(NullPointerException e){
 						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
 						invalid_user_password_frame.setVisible(true);
 						e.printStackTrace();

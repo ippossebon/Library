@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 import view.RemoveItemFromDatabaseFrame;
 import view.StaffFrame;
+import view.UserFrame;
 
 public class OkButtonRemoveItemAction implements ActionListener{
 
@@ -17,8 +18,8 @@ public class OkButtonRemoveItemAction implements ActionListener{
 		
 		try{
 			String titleToRemove = RemoveItemFromDatabaseFrame.getTitleTextField().getText();
-			StaffFrame.getDatabaseController().removeItemFromDatabase(titleToRemove);
-			StaffFrame.getDatabaseController().showDatabase();
+			UserFrame.getDatabaseController().removeItemFromDatabase(titleToRemove);
+			UserFrame.getDatabaseController().showDatabase();
 		}catch (NullPointerException n){
 			System.out.println("Item not found in database.");
 		}

@@ -15,6 +15,7 @@ import view.AddItemToDatabaseFrame;
 import view.InvalidTypeErrorFrame;
 import view.ItemMustHaveErrorFrame;
 import view.StaffFrame;
+import view.UserFrame;
 
 public class OkButtonAddItemAction implements ActionListener{
 
@@ -92,7 +93,7 @@ public class OkButtonAddItemAction implements ActionListener{
 			}
 		}
 		
-		if (! StaffFrame.getDatabaseController().isIDValid(id)){
+		if (! UserFrame.getDatabaseController().isIDValid(id)){
 			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an unique ID. This ID already exists.");
 			mustHaveError.setVisible(true);
 		}
@@ -112,48 +113,48 @@ public class OkButtonAddItemAction implements ActionListener{
 		
 		if (type.toLowerCase().equals("book")){
 			Book book = new Book(author, title, id, ageRestriction,  categoriesList);
-			StaffFrame.getDatabaseController().addItemToDatabase(book);
+			UserFrame.getDatabaseController().addItemToDatabase(book);
 			
 			for (String c : categoriesList){
-				StaffFrame.getDatabaseController().addCategoryToDatabase(c);
+				UserFrame.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
 		else if (type.toLowerCase().equals("cd")){
 			CD cd = new CD(author, title, id, genre,  categoriesList);
-			StaffFrame.getDatabaseController().addItemToDatabase(cd);
+			UserFrame.getDatabaseController().addItemToDatabase(cd);
 			
 			for (String c : categoriesList){
-				StaffFrame.getDatabaseController().addCategoryToDatabase(c);
+				UserFrame.getDatabaseController().addCategoryToDatabase(c);
 			}
-			StaffFrame.getDatabaseController().addGenreToDatabase(genre);
+			UserFrame.getDatabaseController().addGenreToDatabase(genre);
 			
 		}
 		else if (type.toLowerCase().equals("document")){
 			Document document = new Document(author, title, id,  categoriesList);
-			StaffFrame.getDatabaseController().addItemToDatabase(document);
+			UserFrame.getDatabaseController().addItemToDatabase(document);
 			
 			for (String c : categoriesList){
-				StaffFrame.getDatabaseController().addCategoryToDatabase(c);
+				UserFrame.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
 		else if (type.toLowerCase().equals("dvd")){
 			DVD dvd = new DVD(author, title, id, ageRestriction, genre,  categoriesList);
-			StaffFrame.getDatabaseController().addItemToDatabase(dvd);
+			UserFrame.getDatabaseController().addItemToDatabase(dvd);
 			
 			for (String c : categoriesList){
-				StaffFrame.getDatabaseController().addCategoryToDatabase(c);
+				UserFrame.getDatabaseController().addCategoryToDatabase(c);
 			}
-			StaffFrame.getDatabaseController().addGenreToDatabase(genre);
+			UserFrame.getDatabaseController().addGenreToDatabase(genre);
 		}
 		else if (type.toLowerCase().equals("videogame")){
 			VideoGame game = new VideoGame(author, title, id, ageRestriction, categoriesList);
-			StaffFrame.getDatabaseController().addItemToDatabase(game);
+			UserFrame.getDatabaseController().addItemToDatabase(game);
 			
 			for (String c : categoriesList){
-				StaffFrame.getDatabaseController().addCategoryToDatabase(c);
+				UserFrame.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
-		StaffFrame.getDatabaseController().showDatabase();
+		UserFrame.getDatabaseController().showDatabase();
 	}
 
 }

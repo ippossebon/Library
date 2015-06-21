@@ -16,6 +16,7 @@ public class Database {
 
 	public static final int STAFF = 0;
 	public static final int SUPER_STAFF = 1;
+	public static final int MEMBER = 2;
 	
 	private ArrayList<Item> items;
 	private ArrayList<Member> members;
@@ -34,17 +35,17 @@ public class Database {
 		this.setSuperStaff(new ArrayList<SuperStaff>());
 		
 		// Add data to database.
-		Member member1 = new Member("Alan Turing", 30);
+		Member member1 = new Member("Alan Turing", 30, "turing");
 		this.addMember(member1);
-		Member member2 = new Member("Stephen Hawking", 73);
+		Member member2 = new Member("Stephen Hawking", 73, "computers");
 		this.addMember(member2);
-		Member member3 = new Member("Sheldon Cooper", 5);
+		Member member3 = new Member("Sheldon Cooper", 5, "bazinga");
 		this.addMember(member3);
-		Member member4 = new Member("Penny", 28);
+		Member member4 = new Member("Penny", 28, "leonard");
 		this.addMember(member4);
-		Member member5 = new Member("Leonard Hofstadter", 29);
+		Member member5 = new Member("Leonard Hofstadter", 29, "penny");
 		this.addMember(member5);
-		Member member6 = new Member("Amy Farrah Fowler", 15);
+		Member member6 = new Member("Amy Farrah Fowler", 15, "lovesheldon");
 		this.addMember(member6);
 	
 		Staff staff1 = new Staff("Rachel Greene", "barneys");

@@ -36,7 +36,7 @@ public class RentedItemsFrame extends JFrame {
 		ArrayList<String> rentedItems = new ArrayList<String>();
 		ArrayList<String> memberNames = new ArrayList<String>();
 		
-		for (Rent r : StaffFrame.getDatabaseController().getCurrentRentedItems()){
+		for (Rent r : UserFrame.getDatabaseController().getCurrentRentedItems()){
 			rentedItems.add(r.getItem().getTitle());
 			memberNames.add(r.getMember().getName());
 		}

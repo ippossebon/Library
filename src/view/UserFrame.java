@@ -1,9 +1,9 @@
 package view;
 
 import java.awt.Color;
-import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -13,7 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -21,18 +20,15 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import model.Item;
-import controller.LoanButtonAction;
-import controller.LoanController;
-import controller.RentedItemsButtonAction;
 import controller.SearchButtonAction;
 import controller.SearchController;
 import database.DatabaseController;
 
-public class StaffFrame extends JFrame{
+public class UserFrame extends JFrame {
 
-	public static final int MAXRESULTSIZE = 100;
-	private static DatabaseController databaseController;
 	private static JPanel contentPane;
+	private static DatabaseController databaseController;
+	public static final int MAXRESULTSIZE = 100;
 	private static JTextField txtSearchForItem;
 	private static JList<String> searchResultsList;
 	private static JComboBox<String> comboBoxType;
@@ -43,11 +39,10 @@ public class StaffFrame extends JFrame{
 	private static JRadioButton rdbtnTitle;
 	private static JRadioButton rdbtnIdentifier;
 
-	public StaffFrame(DatabaseController dc) throws IOException 
-	{	
+	public UserFrame(DatabaseController dc) {
 		databaseController = dc;
-		searchResultsList = new JList<String>();
 		ButtonGroup group = new ButtonGroup();
+		searchResultsList = new JList<String>();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 784, 515);
@@ -65,12 +60,6 @@ public class StaffFrame extends JFrame{
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(165, 177, 1, 16);
 		contentPane.add(textArea);
-		
-		LoanController loanController = new LoanController(databaseController);
-		JButton btnLoan = new JButton("Loan");
-		btnLoan.setBounds(634, 121, 117, 29);
-		btnLoan.addActionListener(new LoanButtonAction(loanController));
-		contentPane.add(btnLoan);
 		
 		comboBoxType = new JComboBox<String>();
 		comboBoxType.setModel(new DefaultComboBoxModel<String>(new String[] {"All", "Book", "CD", "Document", "DVD", "VideoGame"}));
@@ -130,18 +119,13 @@ public class StaffFrame extends JFrame{
 		contentPane.add(rdbtnIdentifier);
 		group.add(rdbtnIdentifier);
 		
-		SearchController searchController = new SearchController(databaseController);
+		SearchController searchController = new SearchController();
 		JButton btnSearch = new JButton("Search");
 		btnSearch.setBounds(634, 7, 117, 29);
 		btnSearch.addActionListener(new SearchButtonAction(searchController));
 		contentPane.add(btnSearch);
-		
-		JButton btnRentedItems = new JButton("Rented items");
-		btnRentedItems.setBounds(634, 162, 117, 29);
-		btnRentedItems.addActionListener(new RentedItemsButtonAction());
-		contentPane.add(btnRentedItems);
 	}
-	
+
 	public static void showSearchResult(ArrayList<Item> searchResult){
 		DefaultListModel<String> model = new DefaultListModel<String>();
 		contentPane.revalidate();

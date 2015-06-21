@@ -108,6 +108,14 @@ public class DatabaseController {
 			}
 		}
 		
+		for (Member m : this.getMembers()){
+			if (m.getName().equals(name)){
+				if (m.getPassword().equals(password)){
+					return this.database.MEMBER;
+				}
+			}
+		}
+		
 		return -1;
 	}
 

@@ -8,10 +8,10 @@ import model.DVD;
 import model.Item;
 import model.VideoGame;
 import view.StaffFrame;
+import view.UserFrame;
 import database.DatabaseController;
 
 public class SearchController {
-	private DatabaseController databaseController;
 	private String toSearch;
 	private ArrayList<Item> foundResults;
 	private boolean searchForID;
@@ -22,8 +22,7 @@ public class SearchController {
 	private String categoryToSearch;
 	private int ageRestrictionToSearch;
 	
-	public SearchController(DatabaseController databaseController){
-		this.databaseController = databaseController;
+	public SearchController(){
 		this.foundResults = new ArrayList<Item>();
 	}
 
@@ -59,12 +58,12 @@ public class SearchController {
 	
 	private ArrayList<Item> searchForID(){
 		if (toSearch == null){
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else{
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				if (i.getId().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);			
 				}
@@ -75,13 +74,13 @@ public class SearchController {
 	
 	private ArrayList<Item> searchForTitle(){
 		if (toSearch == null){
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else
 		{
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				if (i.getTitle().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
 				}
@@ -93,13 +92,13 @@ public class SearchController {
 	private ArrayList<Item> searchForAuthor(){
 		
 		if (toSearch == null){
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else
 		{
-			for (Item i: this.databaseController.getItems()){
+			for (Item i: UserFrame.getDatabaseController().getItems()){
 				if (i.getAuthor().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
 				}
@@ -249,9 +248,9 @@ public class SearchController {
 	}
 	
 	public void onSearchFinished(){
-		StaffFrame.showSearchResult(this.foundResults);
+		UserFrame.showSearchResult(this.foundResults);
 		resetResults();
-		StaffFrame.resetSearchResult();
+		UserFrame.resetSearchResult();
 	}
 
 	public String getTypeToSearch() {
@@ -308,7 +307,7 @@ public class SearchController {
 	}
 	
 	public ArrayList<Item> returnAllDatabase(){
-		for (Item i : this.databaseController.getItems()){
+		for (Item i : UserFrame.getDatabaseController().getItems()){
 			this.foundResults.add(i);
 		}
 		return this.foundResults;

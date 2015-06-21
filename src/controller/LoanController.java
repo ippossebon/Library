@@ -1,5 +1,6 @@
 package controller;
 
+import view.UserFrame;
 import model.Book;
 import model.DVD;
 import model.Item;
@@ -14,14 +15,13 @@ public class LoanController {
 
 	private Item itemToRent;
 	private Member member;
-	private DatabaseController databaseController;
 	
-	public LoanController(DatabaseController databaseController){
-		this.databaseController = databaseController;
+	public LoanController(){
+		
 	}
 	
 	public void setItemToRent(String titleToRent){
-		this.itemToRent = this.databaseController.getItemFromTitle(titleToRent);
+		this.itemToRent = UserFrame.getDatabaseController().getItemFromTitle(titleToRent);
 	}
 
 	public Item getItemToRent() {
@@ -37,11 +37,11 @@ public class LoanController {
 	}
 	
 	public void setMember(String name){
-		this.member = this.databaseController.getMemberByName(name);
+		this.member = UserFrame.getDatabaseController().getMemberByName(name);
 	}
 	
 	public boolean isMemberOnDatabase(String name){
-		return this.databaseController.isMemberOnDatabase(name);
+		return UserFrame.getDatabaseController().isMemberOnDatabase(name);
 	}
 	
 	public Member getMember(){
@@ -74,9 +74,9 @@ public class LoanController {
 
 	public void loan(){
 		Rent rent = new Rent(this.member, this.itemToRent);
-		this.databaseController.addRentedItem(rent);
+		UserFrame.getDatabaseController().addRentedItem(rent);
 		this.itemToRent.setAvailable(false);
-		for (Rent r : this.databaseController.getCurrentRentedItems()){
+		for (Rent r : UserFrame.getDatabaseController().getCurrentRentedItems()){
 			System.out.println("Item: " + r.getItem().getTitle());
 			System.out.println("Member: " + r.getMember().getName());
 		}

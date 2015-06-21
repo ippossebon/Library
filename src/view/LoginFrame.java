@@ -32,7 +32,6 @@ public class LoginFrame extends JFrame {
 		});
 	}
 
-	// Creates the frame
 	public LoginFrame() { 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 395, 187);
