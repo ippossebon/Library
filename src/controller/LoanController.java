@@ -53,23 +53,23 @@ public class LoanController {
 		
 		if (this.itemToRent instanceof Book){
 			Book book = (Book) this.itemToRent;
-			if (this.member.getAge() >= book.getAgeRestriction()){
-				return true;
+			if (this.member.getAge() < book.getAgeRestriction()){
+				return false;
 			}
 		}
 		else if (this.itemToRent instanceof DVD){
 			DVD dvd = (DVD) this.itemToRent;
-			if (this.member.getAge() >= dvd.getAgeRestriction()){
-				return true;
+			if (this.member.getAge() < dvd.getAgeRestriction()){
+				return false;
 			}
 		}
 		else if (this.itemToRent instanceof VideoGame){
 			VideoGame game = (VideoGame) this.itemToRent;
-			if (this.member.getAge() >= game.getAgeRestriction()){
-				return true;
+			if (this.member.getAge() < game.getAgeRestriction()){
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public void loan(){

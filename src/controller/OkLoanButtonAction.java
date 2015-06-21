@@ -16,6 +16,8 @@ public class OkLoanButtonAction implements ActionListener{
 		this.loanController = loanController;
 	}
 
+	/* The loan will only succed if the person is a library member and is old enough to rent the item. Moreover, the item must be available
+	 * for loan, if not, the user can request it.*/
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			
@@ -27,19 +29,17 @@ public class OkLoanButtonAction implements ActionListener{
 					this.loanController.loan();
 				}
 				else{
-					// Imprime erro: item nao esta disponivel.. pergunta se quer reservar
 					UnavailableItemErrorFrame unavailableItemErrorFrame = new UnavailableItemErrorFrame(this.loanController.getItemToRent());
 					unavailableItemErrorFrame.setVisible(true);
 				}
 			}
 			else{
-				// Imprime erro: membro nao tem idade suficiente
+				
 				MemberNotOldEnoughErrorFrame memberNotOldEnoughErrorFrame = new MemberNotOldEnoughErrorFrame();
 				memberNotOldEnoughErrorFrame.setVisible(true);
 			}
 		}
 		else{
-			//imprime mensagem de erro: membro nao encontrado.
 			MemberNotFoundErrorFrame memberNotFoundErrorFrame = new MemberNotFoundErrorFrame();
 			memberNotFoundErrorFrame.setVisible(true);
 		}	
