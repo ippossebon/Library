@@ -2,6 +2,7 @@ package database;
 
 import java.util.ArrayList;
 
+import view.StaffFrame;
 import model.Item;
 import model.Member;
 import model.Rent;
@@ -137,5 +138,64 @@ public class DatabaseController {
 	
 	public void addRequest(Request request){
 		this.requestedItems.add(request);
+	}
+	
+	// Returns true if the id is unique.
+	public boolean isIDValid(String id){
+		for (Item i : this.database.getItems()){
+			if (i.getId().equals(id)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void removeItemFromDatabase(String title){
+		for (int i = this.database.getItems().size() - 1; i >= 0; i--){
+			if (this.database.getItems().get(i).getTitle().equals(title)){
+				this.database.getItems().remove(i);
+			}
+		}
+	}
+	
+	public boolean isNewCategory(String category){
+		for (String c: this.database.getCategories()){
+			if (c.toLowerCase().equals(category.toLowerCase())){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean isNewGenre(String genre){
+		for (String g : this.database.getGenres()){
+			if (g.toLowerCase().equals(genre.toLowerCase())){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public void addCategoryToDatabase(String category){
+		if (isNewCategory(category)){
+			this.database.getCategories().add(category);
+		}
+	}
+	
+	public void addGenreToDatabase(String genre){
+		if (isNewGenre(genre)){
+			this.database.getGenres().add(genre);
+		}
+	}
+	
+	public void showDatabase(){
+		for (Item i : this.database.getItems()){
+			System.out.println("-----------------------------------------------------");
+			System.out.println ("Title: " + i.getTitle() + " Author: " + i.getAuthor());
+			System.out.println("Categories: ");
+			for (String c : i.getCategories()){
+				System.out.println(c);
+			}
+		}
 	}
 }

@@ -173,6 +173,7 @@ public class SearchController {
 			if (!containsCategory){
 				this.foundResults.remove(i);
 			}
+			containsCategory = false;
 		}
 		return this.foundResults;
 	}
