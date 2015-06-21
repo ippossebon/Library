@@ -2,7 +2,6 @@ package database;
 
 import java.util.ArrayList;
 
-import view.StaffFrame;
 import model.Item;
 import model.Member;
 import model.Rent;

@@ -22,6 +22,7 @@ import javax.swing.border.MatteBorder;
 import model.Item;
 import controller.LoanButtonAction;
 import controller.LoanController;
+import controller.RentedItemsButtonAction;
 import controller.SearchButtonAction;
 import controller.SearchController;
 import database.DatabaseController;
@@ -63,7 +64,7 @@ public class StaffFrame extends JFrame{
 		textArea.setBounds(165, 177, 1, 16);
 		contentPane.add(textArea);
 		
-		LoanController loanController = new LoanController(this.databaseController);
+		LoanController loanController = new LoanController(databaseController);
 		JButton btnLoan = new JButton("Loan");
 		btnLoan.setBounds(634, 121, 117, 29);
 		btnLoan.addActionListener(new LoanButtonAction(loanController));
@@ -129,6 +130,11 @@ public class StaffFrame extends JFrame{
 		btnSearch.setBounds(634, 7, 117, 29);
 		btnSearch.addActionListener(new SearchButtonAction(searchController));
 		contentPane.add(btnSearch);
+		
+		JButton btnRentedItems = new JButton("Rented items");
+		btnRentedItems.setBounds(634, 162, 117, 29);
+		btnRentedItems.addActionListener(new RentedItemsButtonAction());
+		contentPane.add(btnRentedItems);
 	}
 	
 	public static void showSearchResult(ArrayList<Item> searchResult){
