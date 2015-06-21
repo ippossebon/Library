@@ -10,15 +10,14 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import model.Rent;
 import controller.Main;
+import model.RequestedItem;
 
-public class RentedItemsFrame extends JFrame {
-
+public class RequestedNewItemsTableFrame extends JFrame{
 	private JPanel contentPane;
 	private JTable  table;
-
-	public RentedItemsFrame() {
+	
+	public RequestedNewItemsTableFrame(){
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -34,19 +33,21 @@ public class RentedItemsFrame extends JFrame {
 		scrollPane.setViewportView(table);
 		
 		DefaultTableModel dft = new DefaultTableModel();
-		ArrayList<String> rentedItems = new ArrayList<String>();
-		ArrayList<String> memberNames = new ArrayList<String>();
+		ArrayList<String> type = new ArrayList<String>();
+		ArrayList<String> title = new ArrayList<String>();
+		ArrayList<String> author = new ArrayList<String>();
 		
-		for (Rent r : Main.getDatabaseController().getCurrentRentedItems()){
-			rentedItems.add(r.getItem().getTitle());
-			memberNames.add(r.getMember().getName());
+		for (RequestedItem r : Main.getDatabaseController().getNewItemsRequested()){
+			type.add(r.getType().toLowerCase());
+			title.add(r.getTitle());
+			author.add(r.getAuthor());
 		}
 		
-		dft.addColumn("Item title", rentedItems.toArray());
-		dft.addColumn("Member name", memberNames.toArray());
+		dft.addColumn("Type", type.toArray());
+		dft.addColumn("Title", title.toArray());
+		dft.addColumn("Author", author.toArray());
 		
 		table.setModel(dft);
 		contentPane.setVisible(true);
 	}
-
 }

@@ -20,14 +20,13 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.MatteBorder;
 
 import model.Item;
+import controller.Main;
 import controller.SearchButtonAction;
 import controller.SearchController;
-import database.DatabaseController;
 
 public class UserFrame extends JFrame {
 
 	private static JPanel contentPane;
-	private static DatabaseController databaseController;
 	public static final int MAXRESULTSIZE = 100;
 	private static JTextField txtSearchForItem;
 	private static JList<String> searchResultsList;
@@ -39,13 +38,12 @@ public class UserFrame extends JFrame {
 	private static JRadioButton rdbtnTitle;
 	private static JRadioButton rdbtnIdentifier;
 
-	public UserFrame(DatabaseController dc) {
-		databaseController = dc;
+	public UserFrame() {
 		ButtonGroup group = new ButtonGroup();
 		searchResultsList = new JList<String>();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 784, 515);
+		setBounds(100, 100, 800, 515);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,7 +67,7 @@ public class UserFrame extends JFrame {
 		comboBoxGenre = new JComboBox<String>();
 		comboBoxGenre.setModel(new DefaultComboBoxModel<String>(new String[] {"All"}));
 		comboBoxGenre.setBounds(141, 85, 147, 27);
-		for (String g : databaseController.getGenresFromDatabase()){
+		for (String g : Main.getDatabaseController().getGenresFromDatabase()){
 			comboBoxGenre.addItem(g);
 		}
 		contentPane.add(comboBoxGenre);
@@ -77,7 +75,7 @@ public class UserFrame extends JFrame {
 		comboBoxCategory = new JComboBox<String>();
 		comboBoxCategory.setModel(new DefaultComboBoxModel<String>(new String[] {"All"}));
 		comboBoxCategory.setBounds(300, 85, 150, 27);
-		for (String c : databaseController.getCategoriesFromDatabase()){
+		for (String c : Main.getDatabaseController().getCategoriesFromDatabase()){
 			comboBoxCategory.addItem(c);
 		}
 		comboBoxCategory.setVisible(true);
@@ -121,7 +119,7 @@ public class UserFrame extends JFrame {
 		
 		SearchController searchController = new SearchController();
 		JButton btnSearch = new JButton("Search");
-		btnSearch.setBounds(634, 7, 117, 29);
+		btnSearch.setBounds(634, 7, 160, 29);
 		btnSearch.addActionListener(new SearchButtonAction(searchController));
 		contentPane.add(btnSearch);
 	}
@@ -194,9 +192,5 @@ public class UserFrame extends JFrame {
 	
 	public static JTextField getSearchForItemTextField(){
 		return txtSearchForItem;
-	}
-	
-	public static DatabaseController getDatabaseController(){
-		return databaseController;
 	}
 }

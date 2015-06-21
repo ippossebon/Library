@@ -93,7 +93,7 @@ public class OkButtonAddItemAction implements ActionListener{
 			}
 		}
 		
-		if (! UserFrame.getDatabaseController().isIDValid(id)){
+		if (! Main.getDatabaseController().isIDValid(id)){
 			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an unique ID. This ID already exists.");
 			mustHaveError.setVisible(true);
 		}
@@ -113,48 +113,48 @@ public class OkButtonAddItemAction implements ActionListener{
 		
 		if (type.toLowerCase().equals("book")){
 			Book book = new Book(author, title, id, ageRestriction,  categoriesList);
-			UserFrame.getDatabaseController().addItemToDatabase(book);
+			Main.getDatabaseController().addItemToDatabase(book);
 			
 			for (String c : categoriesList){
-				UserFrame.getDatabaseController().addCategoryToDatabase(c);
+				Main.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
 		else if (type.toLowerCase().equals("cd")){
 			CD cd = new CD(author, title, id, genre,  categoriesList);
-			UserFrame.getDatabaseController().addItemToDatabase(cd);
+			Main.getDatabaseController().addItemToDatabase(cd);
 			
 			for (String c : categoriesList){
-				UserFrame.getDatabaseController().addCategoryToDatabase(c);
+				Main.getDatabaseController().addCategoryToDatabase(c);
 			}
-			UserFrame.getDatabaseController().addGenreToDatabase(genre);
+			Main.getDatabaseController().addGenreToDatabase(genre);
 			
 		}
 		else if (type.toLowerCase().equals("document")){
 			Document document = new Document(author, title, id,  categoriesList);
-			UserFrame.getDatabaseController().addItemToDatabase(document);
+			Main.getDatabaseController().addItemToDatabase(document);
 			
 			for (String c : categoriesList){
-				UserFrame.getDatabaseController().addCategoryToDatabase(c);
+				Main.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
 		else if (type.toLowerCase().equals("dvd")){
 			DVD dvd = new DVD(author, title, id, ageRestriction, genre,  categoriesList);
-			UserFrame.getDatabaseController().addItemToDatabase(dvd);
+			Main.getDatabaseController().addItemToDatabase(dvd);
 			
 			for (String c : categoriesList){
-				UserFrame.getDatabaseController().addCategoryToDatabase(c);
+				Main.getDatabaseController().addCategoryToDatabase(c);
 			}
-			UserFrame.getDatabaseController().addGenreToDatabase(genre);
+			Main.getDatabaseController().addGenreToDatabase(genre);
 		}
 		else if (type.toLowerCase().equals("videogame")){
 			VideoGame game = new VideoGame(author, title, id, ageRestriction, categoriesList);
-			UserFrame.getDatabaseController().addItemToDatabase(game);
+			Main.getDatabaseController().addItemToDatabase(game);
 			
 			for (String c : categoriesList){
-				UserFrame.getDatabaseController().addCategoryToDatabase(c);
+				Main.getDatabaseController().addCategoryToDatabase(c);
 			}
 		}
-		UserFrame.getDatabaseController().showDatabase();
+		Main.getDatabaseController().showDatabase();
 	}
 
 }

@@ -1,7 +1,5 @@
-package controller;
+package model;
 
-import model.Item;
-import model.Member;
 
 public class Request {
 

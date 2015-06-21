@@ -9,8 +9,6 @@ import model.Rent;
 import model.VideoGame;
 import database.DatabaseController;
 
-// Allows staff to loan an item.
-// Allows staff to check which member has which item.
 public class LoanController {
 
 	private Item itemToRent;
@@ -21,7 +19,7 @@ public class LoanController {
 	}
 	
 	public void setItemToRent(String titleToRent){
-		this.itemToRent = UserFrame.getDatabaseController().getItemFromTitle(titleToRent);
+		this.itemToRent = Main.getDatabaseController().getItemFromTitle(titleToRent);
 	}
 
 	public Item getItemToRent() {
@@ -37,11 +35,11 @@ public class LoanController {
 	}
 	
 	public void setMember(String name){
-		this.member = UserFrame.getDatabaseController().getMemberByName(name);
+		this.member = Main.getDatabaseController().getMemberByName(name);
 	}
 	
 	public boolean isMemberOnDatabase(String name){
-		return UserFrame.getDatabaseController().isMemberOnDatabase(name);
+		return Main.getDatabaseController().isMemberOnDatabase(name);
 	}
 	
 	public Member getMember(){
@@ -74,9 +72,9 @@ public class LoanController {
 
 	public void loan(){
 		Rent rent = new Rent(this.member, this.itemToRent);
-		UserFrame.getDatabaseController().addRentedItem(rent);
+		Main.getDatabaseController().addRentedItem(rent);
 		this.itemToRent.setAvailable(false);
-		for (Rent r : UserFrame.getDatabaseController().getCurrentRentedItems()){
+		for (Rent r : Main.getDatabaseController().getCurrentRentedItems()){
 			System.out.println("Item: " + r.getItem().getTitle());
 			System.out.println("Member: " + r.getMember().getName());
 		}

@@ -6,12 +6,11 @@ import javax.swing.JButton;
 
 import controller.AddItemToDatabaseButtonAction;
 import controller.RemoveItemFromDatabaseButtonAction;
-import database.DatabaseController;
 
 public class SuperStaffFrame extends StaffFrame{
 	
-	public SuperStaffFrame(DatabaseController databaseController) throws IOException{
-		super(databaseController);
+	public SuperStaffFrame() throws IOException{
+		super();
 		
 		JButton btnAddItemToDatabase = new JButton("Add item to Database");
 		btnAddItemToDatabase.setBounds(21, 430, 170, 29);

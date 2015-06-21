@@ -9,21 +9,15 @@ import view.SuperStaffFrame;
 import database.DatabaseController;
 
 public class LoginController{
-	private DatabaseController databaseController;
 	private String userName;
 	private String userPassword;
 	private int interfaceOption;
 	
-	public LoginController(String name, String password){
-		this.databaseController = new DatabaseController();
-		setUserName(name);
-		setUserPassword(password);
-		setInterfaceOption();
-		createInterface();
+	public LoginController(){
 	}
 	
 	public void setInterfaceOption(){
-		this.interfaceOption = this.databaseController.checkLogin(this.userName, this.userPassword);
+		this.interfaceOption = Main.getDatabaseController().checkLogin(this.userName, this.userPassword);
 	}
 
 	public String getUserName() {
@@ -47,7 +41,7 @@ public class LoginController{
 		switch(this.interfaceOption){
 		case 0:
 			try {
-					StaffFrame staffFrame = new StaffFrame(this.databaseController);
+					StaffFrame staffFrame = new StaffFrame();
 					staffFrame.setVisible(true);
 				}catch (NullPointerException e){ 	
 					InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
@@ -62,7 +56,7 @@ public class LoginController{
 				break;	
 				case 1:
 					try {
-						SuperStaffFrame superStaffFrame = new SuperStaffFrame(this.databaseController);
+						SuperStaffFrame superStaffFrame = new SuperStaffFrame();
 						superStaffFrame.setVisible(true);
 					} catch (NullPointerException e){ 
 						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
@@ -77,7 +71,7 @@ public class LoginController{
 					break;
 				case 2:
 					try{
-						MemberFrame memberFrame = new MemberFrame(this.databaseController);
+						MemberFrame memberFrame = new MemberFrame();
 						memberFrame.setVisible(true);
 					}catch(NullPointerException e){
 						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();

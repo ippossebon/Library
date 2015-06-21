@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
 import controller.OkLoginAction;
@@ -16,21 +15,6 @@ public class LoginFrame extends JFrame {
 	private JPanel contentPane;
 	private static JTextField nameTextField;
 	private  static JPasswordField passwordField;
-	
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			
-			public void run() {
-				try {
-					LoginFrame frame = new LoginFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	public LoginFrame() { 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

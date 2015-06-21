@@ -5,19 +5,22 @@ import java.util.ArrayList;
 import model.Item;
 import model.Member;
 import model.Rent;
+import model.Request;
+import model.RequestedItem;
 import model.Staff;
 import model.SuperStaff;
-import controller.Request;
 
 public class DatabaseController {
 	private Database database;
 	private ArrayList<Rent> currentRentedItems;
 	private ArrayList<Request> requestedItems;
+	private ArrayList<RequestedItem> newItemsRequested;
 	
 	public DatabaseController(){
 		setDatabase(new Database());
 		setCurrentRentedItems(new ArrayList<Rent>());
 		setRequestedItems(new ArrayList<Request>());
+		setNewItemsRequested(new ArrayList<RequestedItem>());
 	}
 
 	public Database getDatabase() {
@@ -203,6 +206,51 @@ public class DatabaseController {
 			for (String c : i.getCategories()){
 				System.out.println(c);
 			}
+		}
+	}
+
+	public ArrayList<RequestedItem> getNewItemsRequested() {
+		return this.newItemsRequested;
+	}
+
+	public void setNewItemsRequested(ArrayList<RequestedItem> newItemsRequested) {
+		this.newItemsRequested = newItemsRequested;
+	}
+	
+	public boolean isNewRequestedItem(RequestedItem item){
+		for (RequestedItem r : this.newItemsRequested){
+			if (r.getTitle().equals(item.getTitle())){
+				if(r.getAuthor().equals(item.getAuthor())){
+					if (r.getType().equals(item.getType())){
+						return false;
+					}
+				}	
+			}
+		}
+		return true;
+	}
+	public void addNewRequestedItem(RequestedItem item){
+		if (isNewRequestedItem(item)){
+			this.newItemsRequested.add(item);
+		}	
+	}
+	
+	public boolean containsItem(String title, String author, String type){
+		for (Item i : this.database.getItems()){
+			if (i.getTitle().equals(title)){
+				if (i.getAuthor().equals(author)){
+					if (i.getType().equals(type)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	public void printRequestedItems(){
+		for (RequestedItem r : this.newItemsRequested){
+			System.out.println("Type: " + r.getType() + " Title: " + r.getTitle() + " Author: " + r.getAuthor());
 		}
 	}
 }

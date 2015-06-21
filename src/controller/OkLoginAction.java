@@ -15,9 +15,10 @@ public class OkLoginAction implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		LoginController loginController = new LoginController(LoginFrame.getNameTextField().getText().toString(), 
-																LoginFrame.getPasswordField().getText().toString());
+		Main.getLoginController().setUserName(LoginFrame.getNameTextField().getText().toString());
+		Main.getLoginController().setUserPassword(LoginFrame.getPasswordField().getText().toString());
+		Main.getLoginController().setInterfaceOption();
+		Main.getLoginController().createInterface();
 	}
 
 }

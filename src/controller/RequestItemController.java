@@ -4,6 +4,7 @@ import model.Book;
 import model.DVD;
 import model.Item;
 import model.Member;
+import model.Request;
 import model.VideoGame;
 import view.StaffFrame;
 import view.UserFrame;
@@ -33,11 +34,11 @@ public class RequestItemController {
 	}
 	
 	public void setMember(String name){
-		this.member = UserFrame.getDatabaseController().getMemberByName(name);
+		this.member = Main.getDatabaseController().getMemberByName(name);
 	}
 	
 	public boolean isMemberOnDatabase(){
-		return UserFrame.getDatabaseController().isMemberOnDatabase(this.member.getName());
+		return Main.getDatabaseController().isMemberOnDatabase(this.member.getName());
 	}
 	
 	public boolean isMemberOldEnough(){
@@ -68,10 +69,10 @@ public class RequestItemController {
 	
 	public void request(){
 		Request request = new Request(this.member, this.item);
-		UserFrame.getDatabaseController().addRequest(request);
+		Main.getDatabaseController().addRequest(request);
 		
 		System.out.println("Requests: ");
-		for (Request r : UserFrame.getDatabaseController().getRequestedItems()){
+		for (Request r : Main.getDatabaseController().getRequestedItems()){
 			System.out.println("Item: " + r.getItem().getTitle());
 			System.out.println("Member: "+ r.getMember().getName());
 		}

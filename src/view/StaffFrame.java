@@ -3,32 +3,32 @@ package view;
 import java.io.IOException;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
 import controller.LoanButtonAction;
 import controller.LoanController;
 import controller.RentedItemsButtonAction;
-import database.DatabaseController;
+import controller.ShowRequestedNewItemsButtonAction;
 
 public class StaffFrame extends UserFrame{
 
-	public static final int MAXRESULTSIZE = 100;
-	private static DatabaseController databaseController;
-	private static JPanel contentPane;
-
-	public StaffFrame(DatabaseController dc) throws IOException 
+	public StaffFrame() throws IOException 
 	{	
-		super (dc);
+		super ();
 	
 		LoanController loanController = new LoanController();
 		JButton btnLoan = new JButton("Loan");
-		btnLoan.setBounds(634, 121, 117, 29);
+		btnLoan.setBounds(634, 121, 160, 29);
 		btnLoan.addActionListener(new LoanButtonAction(loanController));
-		contentPane.add(btnLoan);
+		add(btnLoan);
 		
 		JButton btnRentedItems = new JButton("Rented items");
-		btnRentedItems.setBounds(634, 162, 117, 29);
+		btnRentedItems.setBounds(634, 162, 160, 29);
 		btnRentedItems.addActionListener(new RentedItemsButtonAction());
-		contentPane.add(btnRentedItems);
+		add(btnRentedItems);
+		
+		JButton btnRequestedNewItem = new JButton("Requested new items");
+		btnRequestedNewItem.setBounds(634, 203, 160, 29);
+		btnRequestedNewItem.addActionListener(new ShowRequestedNewItemsButtonAction());
+		add(btnRequestedNewItem);
 	}
 }

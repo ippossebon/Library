@@ -58,12 +58,12 @@ public class SearchController {
 	
 	private ArrayList<Item> searchForID(){
 		if (toSearch == null){
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else{
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				if (i.getId().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);			
 				}
@@ -74,13 +74,13 @@ public class SearchController {
 	
 	private ArrayList<Item> searchForTitle(){
 		if (toSearch == null){
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else
 		{
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				if (i.getTitle().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
 				}
@@ -92,13 +92,13 @@ public class SearchController {
 	private ArrayList<Item> searchForAuthor(){
 		
 		if (toSearch == null){
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				this.foundResults.add(i);
 			}
 		}
 		else
 		{
-			for (Item i: UserFrame.getDatabaseController().getItems()){
+			for (Item i: Main.getDatabaseController().getItems()){
 				if (i.getAuthor().toLowerCase().contains(toSearch.toLowerCase())){
 					this.foundResults.add(i);
 				}
@@ -307,7 +307,7 @@ public class SearchController {
 	}
 	
 	public ArrayList<Item> returnAllDatabase(){
-		for (Item i : UserFrame.getDatabaseController().getItems()){
+		for (Item i : Main.getDatabaseController().getItems()){
 			this.foundResults.add(i);
 		}
 		return this.foundResults;
