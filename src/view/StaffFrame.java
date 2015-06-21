@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
@@ -46,6 +47,7 @@ public class StaffFrame extends JFrame{
 	{	
 		databaseController = dc;
 		searchResultsList = new JList<String>();
+		ButtonGroup group = new ButtonGroup();
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 784, 515);
@@ -116,14 +118,17 @@ public class StaffFrame extends JFrame{
 		rdbtnAuthor = new JRadioButton("Author");
 		rdbtnAuthor.setBounds(21, 35, 102, 23);
 		contentPane.add(rdbtnAuthor);
+		group.add(rdbtnAuthor);
 		
 		rdbtnTitle = new JRadioButton("Title");
 		rdbtnTitle.setBounds(145, 35, 86, 23);
 		contentPane.add(rdbtnTitle);
+		group.add(rdbtnTitle);
 		
 		rdbtnIdentifier = new JRadioButton("Identifier");
 		rdbtnIdentifier.setBounds(305, 35, 94, 23);
 		contentPane.add(rdbtnIdentifier);
+		group.add(rdbtnIdentifier);
 		
 		SearchController searchController = new SearchController(databaseController);
 		JButton btnSearch = new JButton("Search");
