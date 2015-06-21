@@ -2,11 +2,10 @@ package controller;
 
 import java.io.IOException;
 
-import view.InvalidUserOrPasswordFrame;
+import view.ErrorFrame;
 import view.MemberFrame;
 import view.StaffFrame;
 import view.SuperStaffFrame;
-import database.DatabaseController;
 
 public class LoginController{
 	private String userName;
@@ -44,13 +43,13 @@ public class LoginController{
 					StaffFrame staffFrame = new StaffFrame();
 					staffFrame.setVisible(true);
 				}catch (NullPointerException e){ 	
-					InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-					invalid_user_password_frame.setVisible(true);
+					ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+					errorFrame.setVisible(true);
 					e.printStackTrace();
 					
 				} catch (IOException e1){
-					InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-					invalid_user_password_frame.setVisible(true);
+					ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+					errorFrame.setVisible(true);
 					e1.printStackTrace();
 				}	
 				break;	
@@ -59,13 +58,13 @@ public class LoginController{
 						SuperStaffFrame superStaffFrame = new SuperStaffFrame();
 						superStaffFrame.setVisible(true);
 					} catch (NullPointerException e){ 
-						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-						invalid_user_password_frame.setVisible(true);
+						ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+						errorFrame.setVisible(true);
 						e.printStackTrace();
 						
 					} catch (IOException e1){
-						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-						invalid_user_password_frame.setVisible(true);
+						ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+						errorFrame.setVisible(true);
 						e1.printStackTrace();
 					}
 					break;
@@ -74,14 +73,14 @@ public class LoginController{
 						MemberFrame memberFrame = new MemberFrame();
 						memberFrame.setVisible(true);
 					}catch(NullPointerException e){
-						InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-						invalid_user_password_frame.setVisible(true);
+						ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+						errorFrame.setVisible(true);
 						e.printStackTrace();
 					}
 					break;
 				default:
-					InvalidUserOrPasswordFrame invalid_user_password_frame = new InvalidUserOrPasswordFrame();
-					invalid_user_password_frame.setVisible(true);
+					ErrorFrame errorFrame = new ErrorFrame("Invalid user or password.");
+					errorFrame.setVisible(true);
 					break;
 		}
 	}

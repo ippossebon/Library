@@ -3,8 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.MemberNotFoundErrorFrame;
-import view.MemberNotOldEnoughErrorFrame;
+import view.ErrorFrame;
 import view.RequestItemFrame;
 
 public class OkButtonRequestAction implements ActionListener{
@@ -24,14 +23,14 @@ public class OkButtonRequestAction implements ActionListener{
 				this.requestCotroller.request();
 			}
 			else{
-				MemberNotOldEnoughErrorFrame memberNotOldEnoughErrorFrame = new MemberNotOldEnoughErrorFrame();
-				memberNotOldEnoughErrorFrame.setVisible(true);
+				ErrorFrame errorFrame = new ErrorFrame("Member is not old enough to rent this item.");
+				errorFrame.setVisible(true);
 				
 			}
 		}
 		else{
-			MemberNotFoundErrorFrame memberNotFoundErrorFrame = new MemberNotFoundErrorFrame();
-			memberNotFoundErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Member not found.");
+			errorFrame.setVisible(true);
 		}
 		
 	}

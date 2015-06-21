@@ -3,8 +3,8 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import view.ErrorFrame;
 import view.LoanItemFrame;
-import view.NoItemSelectedErrorFrame;
 import view.UserFrame;
 
 public class LoanButtonAction implements ActionListener{
@@ -22,8 +22,8 @@ public class LoanButtonAction implements ActionListener{
 			String titleToRent = UserFrame.getSearchResultsList().getSelectedValue();
 			LoanItemFrame loanItemFrame = new LoanItemFrame(this.loanController, titleToRent);
 		}catch(NullPointerException n){
-			NoItemSelectedErrorFrame noItemSelectedErrorFrame = new NoItemSelectedErrorFrame();
-			noItemSelectedErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("No item was selected.");
+			errorFrame.setVisible(true);
 		}
 		
 	}

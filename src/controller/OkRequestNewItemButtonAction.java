@@ -4,11 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import model.RequestedItem;
-import view.InvalidTypeErrorFrame;
-import view.ItemAlreadyExistsErrorFrame;
-import view.ItemMustHaveErrorFrame;
+import view.ErrorFrame;
 import view.RequestNewItemFrame;
-import view.UserFrame;
 
 public class OkRequestNewItemButtonAction implements ActionListener{
 
@@ -27,25 +24,25 @@ public class OkRequestNewItemButtonAction implements ActionListener{
 		String author = RequestNewItemFrame.getAuthorTextField().getText();
 		
 		if (type.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "a type");
-			mustHaveError.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Item must have a type.");
+			errorFrame.setVisible(true);
 		}
 		if (title.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "a title");
-			mustHaveError.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Item must have a title.");
+			errorFrame.setVisible(true);
 		}
 		if (author.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an author");
-			mustHaveError.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Item must have an author.");
+			errorFrame.setVisible(true);
 		}
 		if (Main.getDatabaseController().containsItem(title, author, type)){
-			ItemAlreadyExistsErrorFrame itemAlreadyExistsErrorFrame = new ItemAlreadyExistsErrorFrame();
-			itemAlreadyExistsErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("This item already exists in database.");
+			errorFrame.setVisible(true);
 		}
 		else if (! (type.toLowerCase().equals("book") || type.toLowerCase().equals("cd") || type.toLowerCase().equals("document") || 
 				type.toLowerCase().equals("dvd") || type.toLowerCase().equals("videogame"))){
-			InvalidTypeErrorFrame invalidTypeErrorFrame = new InvalidTypeErrorFrame();
-			invalidTypeErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Invalid type. Item must be: Book, CD, Document, DVD or Videogame.");
+			errorFrame.setVisible(true);
 		}
 		else {
 			createNewItemRequest(type, title, author);

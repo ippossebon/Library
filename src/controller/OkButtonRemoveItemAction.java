@@ -3,7 +3,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.ItemNotFoundErrorFrame;
+import view.ErrorFrame;
 import view.RemoveItemFromDatabaseFrame;
 
 public class OkButtonRemoveItemAction implements ActionListener{
@@ -20,8 +20,8 @@ public class OkButtonRemoveItemAction implements ActionListener{
 			Main.getDatabaseController().removeItemFromDatabase(titleToRemove);
 			Main.getDatabaseController().showDatabase();
 		}catch (NullPointerException n){
-			ItemNotFoundErrorFrame itemNotFoundErrorFrame = new ItemNotFoundErrorFrame();
-			itemNotFoundErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Item not found.");
+			errorFrame.setVisible(true);
 		}
 		
 	}

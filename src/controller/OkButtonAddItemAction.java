@@ -9,13 +9,9 @@ import model.Book;
 import model.CD;
 import model.DVD;
 import model.Document;
-import model.Item;
 import model.VideoGame;
 import view.AddItemToDatabaseFrame;
-import view.InvalidTypeErrorFrame;
-import view.ItemMustHaveErrorFrame;
-import view.StaffFrame;
-import view.UserFrame;
+import view.ErrorFrame;
 
 public class OkButtonAddItemAction implements ActionListener{
 
@@ -39,68 +35,65 @@ public class OkButtonAddItemAction implements ActionListener{
 		int ageRestrictionInt = 0;
 		
 		if (type.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "a type");
-			mustHaveError.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Item must have a type.");
+			errorFrame.setVisible(true);
 		}
-		if (title.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "a title");
-			mustHaveError.setVisible(true);
+		else if (title.isEmpty()){
+			ErrorFrame errorFrame = new ErrorFrame("Item must have a title.");
+			errorFrame.setVisible(true);
 		}
-		if (author.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an author");
-			mustHaveError.setVisible(true);
+		else if (author.isEmpty()){
+			ErrorFrame errorFrame = new ErrorFrame("Item must have an author.");
+			errorFrame.setVisible(true);
 		}
-		if (categories.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "at least 1 category");
-			mustHaveError.setVisible(true);
+		else if (categories.isEmpty()){
+			ErrorFrame errorFrame = new ErrorFrame("Item must have at least one category.");
+			errorFrame.setVisible(true);
 		}
-		if (id.isEmpty()){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an ID");
-			mustHaveError.setVisible(true);
+		else if (id.isEmpty()){
+			ErrorFrame errorFrame = new ErrorFrame("Item must have an ID.");
+			errorFrame.setVisible(true);
 		}
-		else{
-			if (type.toLowerCase().equals("cd")){
+		else if (type.toLowerCase().equals("cd")){
 				if (genre.isEmpty()){
-					ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("CD", "a genre");
-					mustHaveError.setVisible(true);
+					ErrorFrame errorFrame = new ErrorFrame("CD must have a genre.");
+					errorFrame.setVisible(true);
 				}
+		}
+		else if (type.toLowerCase().equals("dvd")){
+			if (genre.isEmpty()){
+				ErrorFrame errorFrame = new ErrorFrame("DVD must have a genre.");
+				errorFrame.setVisible(true);
 			}
-			else if (type.toLowerCase().equals("dvd")){
-				if (genre.isEmpty()){
-					ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("DVD", "a genre");
-					mustHaveError.setVisible(true);
-				}
-				ageRestrictionInt = Integer.parseInt(ageRestriction);
-				if (ageRestriction.isEmpty()){						
-					ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("DVD", "an age restriction");
-					mustHaveError.setVisible(true);
-				}
+			ageRestrictionInt = Integer.parseInt(ageRestriction);
+			if (ageRestriction.isEmpty()){						
+				ErrorFrame errorFrame = new ErrorFrame("DVD must have an age restriction.");
+				errorFrame.setVisible(true);
+			}
 					
-			}
-			else if (type.toLowerCase().equals("book")){
-				ageRestrictionInt = Integer.parseInt(ageRestriction);
-				if (ageRestriction.isEmpty()){
-					ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Book", "an age restriction");
-					mustHaveError.setVisible(true);
-				}
-			}
-			else if (type.toLowerCase().equals("videogame")){
-				ageRestrictionInt = Integer.parseInt(ageRestriction);
-				if (ageRestriction.isEmpty()){
-					ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Videogame", "an age restriction");
-					mustHaveError.setVisible(true);
-				}
+		}
+		else if (type.toLowerCase().equals("book")){
+			ageRestrictionInt = Integer.parseInt(ageRestriction);
+			if (ageRestriction.isEmpty()){
+				ErrorFrame errorFrame = new ErrorFrame("Book must have an age restriction.");
+				errorFrame.setVisible(true);
 			}
 		}
-		
-		if (! Main.getDatabaseController().isIDValid(id)){
-			ItemMustHaveErrorFrame mustHaveError = new ItemMustHaveErrorFrame("Item", "an unique ID. This ID already exists.");
-			mustHaveError.setVisible(true);
+		else if (type.toLowerCase().equals("videogame")){
+			ageRestrictionInt = Integer.parseInt(ageRestriction);
+			if (ageRestriction.isEmpty()){
+				ErrorFrame errorFrame = new ErrorFrame("Videogame must have an age restriction.");
+				errorFrame.setVisible(true);
+			}
+		}
+		else if (! Main.getDatabaseController().isIDValid(id)){
+			ErrorFrame errorFrame = new ErrorFrame("Item must have an unique ID. This ID already exists.");
+			errorFrame.setVisible(true);
 		}
 		else if (! (type.toLowerCase().equals("book") || type.toLowerCase().equals("cd") || type.toLowerCase().equals("document") || 
 				type.toLowerCase().equals("dvd") || type.toLowerCase().equals("videogame"))){
-			InvalidTypeErrorFrame invalidTypeErrorFrame = new InvalidTypeErrorFrame();
-			invalidTypeErrorFrame.setVisible(true);
+			ErrorFrame errorFrame = new ErrorFrame("Invalid type. Item must be: Book, CD, Document, DVD or Videogame.");
+			errorFrame.setVisible(true);
 		}
 		else {
 			createItem(type, title, author, categories, id, genre, ageRestrictionInt);
