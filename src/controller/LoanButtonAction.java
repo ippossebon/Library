@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import view.LoanItemFrame;
+import view.NoItemSelectedErrorFrame;
 import view.StaffFrame;
 
 public class LoanButtonAction implements ActionListener{
@@ -17,8 +18,14 @@ public class LoanButtonAction implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		String titleToRent = StaffFrame.getSearchResultsList().getSelectedValue();
-		LoanItemFrame loanItemFrame = new LoanItemFrame(this.loanController, titleToRent);
+		try{
+			String titleToRent = StaffFrame.getSearchResultsList().getSelectedValue();
+			LoanItemFrame loanItemFrame = new LoanItemFrame(this.loanController, titleToRent);
+		}catch(NullPointerException n){
+			NoItemSelectedErrorFrame noItemSelectedErrorFrame = new NoItemSelectedErrorFrame();
+			noItemSelectedErrorFrame.setVisible(true);
+		}
+		
 	}
 
 }

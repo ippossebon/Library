@@ -14,7 +14,7 @@ public class MemberNotFoundErrorFrame extends JFrame {
 
 	public MemberNotFoundErrorFrame() {
 		setTitle("Error: Member not found");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 540, 138);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

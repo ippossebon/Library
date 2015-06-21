@@ -8,31 +8,30 @@ import javax.swing.border.EmptyBorder;
 
 import controller.OkButtonCloseAction;
 
-public class InvalidTypeErrorFrame extends JFrame {
+public class NoItemSelectedErrorFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	public InvalidTypeErrorFrame() {
-		setTitle("Error: Invalid item type");
+	public NoItemSelectedErrorFrame() {
+		setTitle("Error: No item was selected");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 164);
+		setBounds(100, 100, 450, 142);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblErrorInvalidItem = new JLabel("Error: Invalid item type.");
-		lblErrorInvalidItem.setBounds(26, 26, 321, 16);
-		contentPane.add(lblErrorInvalidItem);
+		JLabel errorLabel = new JLabel("Error: No item was selected.");
+		errorLabel.setBounds(21, 10, 200, 50);
+		contentPane.add(errorLabel);
 		
-		JLabel lblAvailableTypesBook = new JLabel("Available types: Book, CD, Document, DVD or Videogame.");
-		lblAvailableTypesBook.setBounds(26, 54, 400, 16);
-		contentPane.add(lblAvailableTypesBook);
+		JLabel lblPleaseSelectAn = new JLabel("Please select an item for this operation.");
+		lblPleaseSelectAn.setBounds(21, 40, 343, 50);
+		contentPane.add(lblPleaseSelectAn);
 		
 		JButton btnOk = new JButton("Ok");
-		btnOk.setBounds(307, 96, 117, 29);
+		btnOk.setBounds(313, 73, 117, 29);
 		btnOk.addActionListener(new OkButtonCloseAction(this));
 		contentPane.add(btnOk);
 	}
-
 }

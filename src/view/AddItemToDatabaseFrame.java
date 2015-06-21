@@ -23,7 +23,7 @@ public class AddItemToDatabaseFrame extends JFrame {
 
 	public AddItemToDatabaseFrame() {
 		setTitle("Add item to Database");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 382);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
