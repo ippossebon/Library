@@ -6,8 +6,6 @@ import model.Item;
 import model.Member;
 import model.Request;
 import model.VideoGame;
-import view.StaffFrame;
-import view.UserFrame;
 
 public class RequestItemController {
 

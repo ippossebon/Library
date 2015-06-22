@@ -7,9 +7,7 @@ import model.CD;
 import model.DVD;
 import model.Item;
 import model.VideoGame;
-import view.StaffFrame;
 import view.UserFrame;
-import database.DatabaseController;
 
 public class SearchController {
 	private String toSearch;

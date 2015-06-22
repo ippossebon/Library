@@ -36,7 +36,7 @@ public class LoginController{
 	}
 	
 	public void createInterface(){
-		// Checks which interface must be create according to the user.
+		// Checks which interface must be create accordingly to the user.
 		switch(this.interfaceOption){
 		case 0:
 			try {

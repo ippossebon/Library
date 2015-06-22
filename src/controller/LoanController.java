@@ -1,13 +1,11 @@
 package controller;
 
-import view.UserFrame;
 import model.Book;
 import model.DVD;
 import model.Item;
 import model.Member;
 import model.Rent;
 import model.VideoGame;
-import database.DatabaseController;
 
 public class LoanController {
 
@@ -47,8 +45,7 @@ public class LoanController {
 	}
 	
 	public boolean isMemberOldEnough(){
-		// Check if the age restriction is satisfiable.
-		
+		// Check if the age restriction is satisfied.	
 		if (this.itemToRent instanceof Book){
 			Book book = (Book) this.itemToRent;
 			if (this.member.getAge() < book.getAgeRestriction()){
@@ -74,9 +71,5 @@ public class LoanController {
 		Rent rent = new Rent(this.member, this.itemToRent);
 		Main.getDatabaseController().addRentedItem(rent);
 		this.itemToRent.setAvailable(false);
-		for (Rent r : Main.getDatabaseController().getCurrentRentedItems()){
-			System.out.println("Item: " + r.getItem().getTitle());
-			System.out.println("Member: " + r.getMember().getName());
-		}
 	}
 }
